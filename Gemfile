@@ -33,7 +33,10 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'better_errors'
 end
+
+gem 'binding_of_caller'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
