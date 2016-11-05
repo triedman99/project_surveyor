@@ -1,0 +1,42 @@
+<%= link_to "Back to Home", root_path %>
+<h1 class='heading text-center'>Survey Builder</h1>
+<hr>
+<h4 class='text-center'><span class='text-muted'>1. Build Survey</span> | <span class='text-bold'>2. Add Questions</span></h4>
+<br/>
+<main>
+  <h3>Next, fill in the questions.</h3>
+  <h2>Title:</h2>
+  <%= @survey.title if @survey %><br/>
+  <h2>Description:</h2>
+  <%= @survey.description if @survey %><br/>
+  <hr>
+
+  <h2>Add a Question:</h2><br/>
+  <p>Choose which type of question to add.</p>
+  <%= form_for [@survey, @question] do |f| %>
+    <%= f.hidden_field :survey_id %>
+    <%= f.select(:question_type, Question.all.collect { |t| t.question_type} ) %><br/><br/>
+    <%= f.submit "Add a New Question", class: "btn btn-primary btn-lg btn-block" %>
+  <% end %>
+  <hr>
+  <h2>Existing Questions:</h2>
+  <% if @survey.questions.empty? %>
+    <p>There are no questions yet!</p>
+  <% else %>
+    <% @survey.questions.each do |question| %>
+      <%= question.body %><br/>
+      <ol>
+        <% question.options.each do |option| %>
+          <li><%= option.body %></li>
+        <% end %>
+      </ol>
+      <%= link_to "Remove Question", survey_question_path(@survey, question), data: { confirm: 'Are you sure?' }, method: :delete %><br/>
+    <% end %>
+  <% end %>
+
+  <hr>
+  <% if @survey.questions.count > 0 %>
+    <%= link_to "Finish Building Survey and Return", survey_path(@survey), class: 'btn btn-primary btn-lg btn-block' %>
+  <% end %>
+
+</main>

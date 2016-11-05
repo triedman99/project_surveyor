@@ -15,7 +15,7 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(whitelisted_survey_parameters)
     if @survey.save
-      redirect_to survey_path(@survey)
+      redirect_to new_survey_question_path(@survey)
     else
       render :new
     end

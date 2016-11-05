@@ -4,14 +4,14 @@
 <h4 class='text-center'><span class='text-bold'>1. Build Survey</span> | <span class='text-muted'>2. Add Questions</span></h4>
 <br/>
 <main>
-  <h4>First, choose a title and a description for your survey</h4>
+  <h3>First, choose a title and a description for your survey</h3>
   <%= form_for @survey do |f| %>
     <%= f.label :title %><br/>
-    <%= f.text_field :title, size: 86, :placeholder => 'eg. "The personality test."' %>
+    <%= f.text_field :title, :placeholder => 'eg. "The personality test."', class: 'form-control' %>
     <br/>
     <br/>
     <%= f.label :description %><br/>
-    <%= f.text_area :description, :cols => 84, :rows => 4, placeholder: 'eg. "Discovering what is unique and special about all you crazy people."' %>
+    <%= f.text_area :description, :cols => 84, :rows => 4, placeholder: 'eg. "Discovering what is unique and special about all you crazy people."', class: 'form-control' %>
     <br/>
     <br/>
     <%= f.submit "Create Survey and Begin Adding Questions", class: 'btn btn-primary btn-lg btn-block' %>

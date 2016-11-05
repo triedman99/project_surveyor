@@ -4,9 +4,12 @@
 <%= link_to "Create a New Survey", new_survey_path, class: "btn btn-primary btn-lg btn-block" %>
 <br/>
 <h3>Take a Survey</h3>
-<% @surveys.all.each_with_index do |survey, i| %>
-  <strong><%= i %> <%= survey.title %></strong>
+<% @surveys.each_with_index do |survey, i| %>
+  <strong><%= i %> <%= link_to "#{survey.title}", survey_path(survey.id) %></strong>
   <br/>
   <%= survey.description %>
   <br/>
+  <% survey.questions.each do |question| %>
+    <%= question.body %><br/>
+  <% end %>
 <% end %>

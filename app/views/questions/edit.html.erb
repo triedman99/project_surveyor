@@ -1,0 +1,50 @@
+<%= link_to "Back to Home", root_path %>
+<h1 class='heading text-center'>Survey Builder</h1>
+<hr>
+<h4 class='text-center'><span class='text-muted'>1. Build Survey</span> | <span class='text-bold'>2. Add Questions</span></h4>
+<br/>
+<main>
+  <h3>Next, fill in the questions.</h3>
+  <h2>Title:</h2>
+  <%= @survey.title if @survey %><br/>
+  <h2>Description:</h2>
+  <%= @survey.description if @survey %><br/>
+  <hr>
+
+  <h2>Add a Multiple Choice Question:</h2><br/>
+  <h4 class='text-center'><span class='text-bold'>1. Select Options</span> | <span class='text-muted'>2. Add Question Text</span></h4>
+  <p>How many options should the question have?</p>
+  <%= form_for [@survey, @question] do |f| %>
+    <%= f.hidden_field :survey_id %>
+    <%= f.select(:num_options, (1..4).map { |i| [i, i] }, class: 'form-control') %><br/>
+
+    How many options can be selected?<br/>
+    <%= f.radio_button :multi_select, false, :checked => true %>
+    <%= f.label :multi_select, "Just One" %>
+    <%= f.radio_button :multi_select, true %>
+    <%= f.label :multi_select, "Multiple" %><br/>
+
+    Is the question required?<br/>
+    <%= f.radio_button :required, true, :checked => true %>
+    <%= f.label :required, "Yes" %>
+    <%= f.radio_button :required, false %>
+    <%= f.label :required, "No" %><br/>
+
+    <%= f.submit "Continue to Next Step", class: "btn btn-primary btn-lg btn-block" %>
+  <% end %>
+
+  <h2>Existing Questions:</h2>
+  <% if @survey.questions.empty? %>
+    <p>There are no questions yet!</p>
+  <% else %>
+    <% @survey.questions.each do |question| %>
+      <%= question.body %><br/>
+      <ol>
+        <% question.options.each do |option| %>
+          <li><%= option.body %></li>
+        <% end %>
+      </ol>
+    <% end %>
+  <% end %>
+
+</main>

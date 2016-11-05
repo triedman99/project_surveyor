@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(version: 20161105022757) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string   "type"
-    t.text     "question"
+    t.string   "question_type"
+    t.integer  "num_options"
+    t.text     "body"
     t.integer  "survey_id"
     t.boolean  "multi_select"
     t.boolean  "required"
