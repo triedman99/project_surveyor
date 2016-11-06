@@ -15,9 +15,9 @@ Answer.delete_all
 end
 
 Survey.all.each do |s|
-  s.questions << Question.new(question_type: ['multiple', 'num_range'].sample, body: Faker::Hipster.sentence(5), survey_id: s.id, required: [true, false].sample, multi_select: false)
-  s.questions << Question.new(question_type: ['multiple', 'num_range'].sample, body: Faker::Hipster.sentence(5), survey_id: s.id, required: [true, false].sample, multi_select: true)
-  s.questions << Question.new(question_type: ['multiple', 'num_range'].sample, body: Faker::Hipster.sentence(5), survey_id: s.id, required: [true, false].sample, multi_select: false)
+  s.questions << Question.new(question_type: 'multiple', body: Faker::Hipster.sentence(5), survey_id: s.id, required: [true, false].sample, multi_select: [true, false].sample)
+  s.questions << Question.new(question_type: 'multiple', body: Faker::Hipster.sentence(5), survey_id: s.id, required: [true, false].sample, multi_select: [true, false].sample)
+  s.questions << Question.new(question_type: 'multiple', body: Faker::Hipster.sentence(5), survey_id: s.id, required: [true, false].sample, multi_select: [true, false].sample)
 end
 
 Question.all.each do |q|

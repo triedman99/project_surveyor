@@ -33,18 +33,6 @@
     <%= f.submit "Continue to Next Step", class: "btn btn-primary btn-lg btn-block" %>
   <% end %>
 
-  <h2>Existing Questions:</h2>
-  <% if @survey.questions.empty? %>
-    <p>There are no questions yet!</p>
-  <% else %>
-    <% @survey.questions.each do |question| %>
-      <%= question.body %><br/>
-      <ol>
-        <% question.options.each do |option| %>
-          <li><%= option.body %></li>
-        <% end %>
-      </ol>
-    <% end %>
-  <% end %>
+  <%= render partial: 'existing_questions', locals: { survey: @survey } %>
 
 </main>

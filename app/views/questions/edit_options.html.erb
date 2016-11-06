@@ -1,3 +1,4 @@
+<%= link_to "Back to Home", root_path %>
 <h1 class="heading text-center">Survey Builder</h1>
 <hr>
 <h4 class='text-center'><span class="text-muted">1. Build Survey</span> | <span class="text-bold">2. Add Questions</span></h4>
@@ -33,18 +34,9 @@
 
   <%= link_to "Back to previous step", edit_survey_question_path(@survey, @question) %>
   <hr>
-  <h2>Existing Questions:</h2>
-  <% if @survey.questions.empty? %>
-    <p>There are no questions yet!</p>
-  <% else %>
-    <% @survey.questions.each do |question| %>
-      <%= question.body %><br/>
-      <ol>
-        <% question.options.each do |option| %>
-          <li><%= option.body %></li>
-        <% end %>
-      </ol><br/>
-      <%= link_to "Remove Question", survey_question_path(@survey, @question), data: { confirm: 'Are you sure?' }, method: :delete %>
-    <% end %>
-  <% end %>
+
+  <%= render partial: 'existing_questions', locals: { survey: @survey } %>
+
+  <br/><br/><%= link_to "Finish Building Survey and Return", surveys_path, class: 'btn btn-primary btn-lg btn-block' %><br/>
+  <br/>
 </main>

@@ -1,0 +1,14 @@
+<h2>Existing Questions:</h2>
+  <% if @survey.questions.empty? %>
+    <p>There are no questions yet!</p>
+  <% else %>
+    <% @survey.questions.each do |question| %>
+      <%= question.body %><br/>
+      <ol>
+        <% question.options.each do |option| %>
+          <li><%= option.body %></li>
+        <% end %>
+      </ol>
+      <%= link_to "Remove Question", survey_question_path(@survey, @question), data: { confirm: 'Are you sure?' }, method: :delete %>
+    <% end %>
+  <% end %>

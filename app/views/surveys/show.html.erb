@@ -1,2 +1,29 @@
-<p><%= @survey.title %></p>
+<%= link_to "Back to Home", root_path %>
+<h1 class="heading text-center">Survey Taker</h1>
+<hr>
+<h2><%= @survey.title %></h2>
 <p><%= @survey.description %></p>
+<em>Questions marked with an asterisk(*) are required</em><br/>
+
+<%= form_for @survey do |survey| %>
+  <% @questions.each_with_index do |question, i| %>
+    <% if question.required %>
+      <h3><span class='text-danger'>*</span><%= "#{i + 1}. #{question.body}" %></h3>
+    <% else %>
+      <h3>&nbsp;<%= "#{i + 1}. #{question.body}" %></h3>
+    <% end %>
+    <% question.options.each do |option| %>
+      <% if question.multiple_choice? && question.select_multiple? %>
+        <%= check_box_tag "survey[#{question.id}][]", option.id %>
+        <%= label_tag "Surveys_questions_ids#{question.id}", option.body %>
+        <br/>
+      <% elsif question.multiple_choice? %>
+        <%= radio_button_tag "survey[#{question.id}][]", option.id %>
+        <%= label_tag "Surveys_questions_ids#{question.id}", option.body %>
+        <br/>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= survey.submit "Submit Your Survey", class: 'btn btn-primary btn-lg btn-block' %>
+<% end %>
